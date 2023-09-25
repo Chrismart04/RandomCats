@@ -1,4 +1,4 @@
-
+//load the cat photo of the api and create the img element
 const loadPhoto = async () => {
   try {
     const URL = "https://api.thecatapi.com/v1/images/search?limit=3";
@@ -16,11 +16,12 @@ const loadPhoto = async () => {
   }
 };
 
+//funtion for the button
 const generateCat = () => {
     loadPhoto();
   };
   
-
+//call the funtion 
 generateCat();
 const button = document.getElementById('generateButton');
 generateButton.addEventListener('click', generateCat);
