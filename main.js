@@ -4,24 +4,25 @@ const loadPhoto = async () => {
     const URL = "https://api.thecatapi.com/v1/images/search?limit=3";
     const res = await fetch(URL);
     const data = await res.json();
-    const img = document.getElementById('img1');
-    const img2 = document.getElementById('img2');
-    const img3 = document.getElementById('img3');
-    img.src = data[0].url;
-    img2.src = data[1].url;
-    img3.src = data[2].url;
-    return photo;
+
+    const imgElements = document.querySelectorAll(".cat-image");
+    imgElements.forEach((imgElement, index) => {
+      if (data[index]) {
+        imgElement.src = data[index].url;
+      }
+    });
   } catch (err) {
-    console.error(err);
+    console.log("error loading cat images", err);
+    document.getElementById("error").innerText =
+      "failed to load cat images, please try again";
   }
 };
-
 //funtion for the button
 const generateCat = () => {
-    loadPhoto();
-  };
-  
-//call the funtion 
+  loadPhoto();
+};
+
+//call the funtion
 generateCat();
-const button = document.getElementById('generateButton');
-generateButton.addEventListener('click', generateCat);
+const button = document.getElementById("generateButton");
+button.addEventListener("click", generateCat);
